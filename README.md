@@ -3,7 +3,7 @@ A guide how to build your own realtime Operating System.  The code samples are a
 
 ## Summary
 Source code adapted after the Udemy.com course "Build Your Own RealTime OS (RTOS) From Ground Up™ on ARM 1" , authored by Israel Gbati.
-https://www.udemy.com/course/rtos-building-from-ground-up-on-arm-processors/
+* https://www.udemy.com/course/rtos-building-from-ground-up-on-arm-processors/
 
 The source code is tested on STM32 Nucleo 144 family boards.
 
