@@ -12,4 +12,12 @@
 #include "stm32f4xx.h"
 #include <stdint.h>
 
+void osKernelInit();
+void osKernelLaunch(uint32_t quanta);
+void osSchedulerLaunch(void);
+
+
+uint8_t osKernelAddThreads(void (*task0)(void), void (*task1)(void), void (*task2)(void));
+
+
 #endif /* OSKERNEL_H_ */

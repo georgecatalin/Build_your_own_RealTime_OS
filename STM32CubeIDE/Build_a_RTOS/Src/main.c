@@ -15,58 +15,55 @@ User LD3: a red user LED is connected to PB14.
 
 #include <stdint.h>
 #include "uart.h"
-#include "timebase.h"
+#include "osKernel.h"
+
+
+#define QUANTA (10)
+
+typedef uint32_t TaskProfiler;
+
+TaskProfiler Task0_Profiler, Task1_Profiler, Task2_Profiler;
 
 void motor_start(void);
 void motor_stop(void);
 void valve_open(void);
 void valve_close(void);
 
-int motor_main(void)
+void task0(void)
 {
 	for(;;)
 	{
-		motor_start();
-		delay(1);
-		motor_stop();
-		delay(1);
+		Task0_Profiler++;
 	}
 }
 
-int valve_main(void)
+void task1(void)
 {
 	for(;;)
 	{
-		valve_open();
-		delay(1);
-		valve_close();
-		delay(1);
+		Task1_Profiler++;
 	}
 }
 
-
+void task2(void)
+{
+	for(;;)
+	{
+		Task2_Profiler++;
+	}
+}
 
 int main(void)
 {
-    /* Loop forever */
+	/* Initialize Kernel */
+	osKernelInit();
+	/* Add threads */
+	osKernelAddThreads(&task0, &task1, &task2);
+	/* Set the Round Robin time slice(quanta) */
+    osKernelLaunch(QUANTA);
 
-	uart_tx_init();
-	timebase_init();
-
-	uint32_t start = 0UL;
-
-	for(;;)
-	{
-		if(start)
-		{
-			motor_main();
-		}
-		else
-		{
-			valve_main();
-		}
-	}
 }
+
 
 void motor_start(void)
 {
