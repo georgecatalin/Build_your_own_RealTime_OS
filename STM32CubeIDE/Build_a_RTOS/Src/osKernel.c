@@ -8,8 +8,20 @@
 
 #include "osKernel.h"
 
+
 #define NUM_OF_THREAD 3
 #define STACK_SIZE 100 //Blocks of 32bit each = 4 bytes => 400 bytes
+#define BUS_FREQUENCY (16000000)
+
+#define  CTRL_CLKSOURCE (1UL<<2)
+#define CTRL_TICK_ENBL_INTERRUPT (1UL<<1)
+#define CTRL_ENABLE (1UL<<0)
+#define CTRL_COUNTFLAG (1UL<<16)
+
+#define SYSTICK_RESET 0
+
+uint32_t MILLIS_PRESCALER;
+
 
 struct tcb
 {
@@ -95,4 +107,34 @@ uint8_t osKernelAddThreads(void (*task0)(void), void (*task1)(void), void (*taks
 	__enable_irq();
 
 	return 1;
+}
+
+void osKernelInit()
+{
+	 MILLIS_PRESCALER = (BUS_FREQUENCY/1000);
+}
+
+
+void osKernelLaunch(uint32_t quanta)
+{
+	/* reset Systick */
+	SysTick->CTRL = SYSTICK_RESET;
+
+	/* Clear Systick current register */
+	SysTick -> VAL = 0;
+
+	/* Load quanta */
+	SysTick->LOAD = (quanta * MILLIS_PRESCALER) -1;
+
+	/* Set systick priority to low priority */
+	NVIC_SetPriority(SysTick_IRQn,15);
+
+	/* Enable systick, select internal clock */
+	SysTick ->CTRL = CTRL_CLKSOURCE | CTRL_ENABLE;
+
+	/* Enable systick interrupt */
+	SysTick->CTRL |= CTRL_TICK_ENBL_INTERRUPT;
+
+	/* Launch Scheduler */
+    osSchedulerLaunch();
 }
