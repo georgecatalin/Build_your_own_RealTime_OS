@@ -34,6 +34,7 @@ void task0(void)
 	for(;;)
 	{
 		Task0_Profiler++;
+		motor_start();
 	}
 }
 
@@ -50,11 +51,13 @@ void task2(void)
 	for(;;)
 	{
 		Task2_Profiler++;
+		valve_open();
 	}
 }
 
 int main(void)
 {
+	uart_tx_init();
 	/* Initialize Kernel */
 	osKernelInit();
 	/* Add threads */

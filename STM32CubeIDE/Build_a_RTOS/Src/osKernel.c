@@ -10,7 +10,7 @@
 
 
 #define NUM_OF_THREAD 3
-#define STACK_SIZE 100 //Blocks of 32bit each = 4 bytes => 400 bytes
+#define STACK_SIZE 400 //Blocks of 32bit each = 4 bytes => 400 bytes
 #define BUS_FREQUENCY (16000000)
 
 #define  CTRL_CLKSOURCE (1UL<<2)
