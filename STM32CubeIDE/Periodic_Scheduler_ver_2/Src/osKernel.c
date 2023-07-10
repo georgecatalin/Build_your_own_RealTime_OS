@@ -189,10 +189,6 @@ __attribute__((naked)) void SysTick_Handler(void) // every cycle defined int the
 	 __asm("BL		osSchedulerRoundRobin");
 	 __asm("POP    {R0,LR}");
 
-
-    /*Load r1 from a location 4bytes above address r1, i.e r1 = currentPt->next*/
-	__asm("LDR R1,[R1,#4]");
-
 	/*Store r1 at address equals r0, i.e currentPt =  r1*/
 	__asm("STR	R1,[R0]");
 
