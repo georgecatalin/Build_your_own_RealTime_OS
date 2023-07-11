@@ -1,6 +1,6 @@
-# Build_your_own_RealTime_OS
-This repository contains my individual work for the "Build Your Own RealTime OS (RTOS) From Ground Up™ on ARM 1" , authored by Israel Gbati.
-## Link
+# Build your own RealTime OS
+This repository contains my individual work for the "Build Your Own RealTime OS (RTOS) From Ground Up™ on ARM 1", authored by Israel Gbati.
+## Course Link
 * https://www.udemy.com/course/rtos-building-from-ground-up-on-arm-processors/
 ## Course Description
 > This course teaches you how to build a Real-Time Operating Systems through intensive practice and theory. It starts by getting you excited through an introduction to the internals of a Real-Time Kernel on ARM Processors, which you shall implement yourself in code.
